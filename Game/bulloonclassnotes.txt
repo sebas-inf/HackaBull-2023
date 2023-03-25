@@ -1,0 +1,24 @@
+balloon class
+variables:
+health, speed, xpos, ypos
+
+when balloon object is initialized the one parameter should be health.
+
+health determines the "level" of the balloon
+
+1 = red
+2 = blue
+3 = green
+etc
+
+speed should be set based on health
+
+damage is the same as health
+
+should have these functions:
+
+draw() #draws the balloon
+get_pos() #returns tuple: (x,y)
+update() #handles "moving" the balloons and checks to see if they got hit
+pop() # if health = 3, subtract one and update the rest of the variables
+# if health = 1 when pop is called, set health to 0 and delete self
