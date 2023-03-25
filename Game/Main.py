@@ -13,18 +13,16 @@ background_image = pygame.image.load("Game\\art\\grass.png") #Map background
 pathColor = (204,171,120)
 pathOutlineColor = (190,145,103)
 
-
-on = True #Flag to run program
  
-while on:
+while True:
     if pygame.event == pygame.QUIT:
-        on = False
+        pygame.quit()
 
     screen.blit(background_image, (0,0)) #Places the game background
     
     pygame.display.flip() #Updates the game screen
     
-pygame.quit()
+
 
 
 
