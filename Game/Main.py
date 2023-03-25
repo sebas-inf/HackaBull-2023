@@ -10,17 +10,17 @@ screen = pygame.display.set_mode((display_width, display_length)) #Display
 
 pygame.display.set_caption("Bullons") #Window Name
 
-background_color = (255, 255, 255) #White Background
+background_image = pygame.image.load("grass.png") #Map backgroun
 
-on = True
+on = True #Flag to run program
  
 while on:
     if pygame.event == pygame.QUIT:
         on = False
 
-    screen.fill(background_color)
+    screen.blit(background_image, (0,0)) #Places the game background
     
-    pygame.display.update()    
+    pygame.display.flip() #Updates the game screen
     
 pygame.quit()
 
