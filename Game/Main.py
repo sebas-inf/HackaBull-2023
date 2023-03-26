@@ -63,27 +63,45 @@ def won():
     button_surface.blit(text, text_rect)
 
 
-while True:
-    if pygame.event == pygame.QUIT:
-        pygame.quit()
+def play():
+    pass
 
-    screen.blit(background_image, (0,0)) #Places the game background
+def menu():
+    button_width = 200
+    button_height = 100
+    button_surface = pygame.Surface((button_width, button_height))
+    button_surface.fill((65,135,145))
+    button_rect = button_surface.get_rect(center = (button_width // 2, button_height // 2))
+    text = font.render("Start", True, (255,255,255))
+    text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
+    button_surface.blit(text, text_rect)
 
-    #if lose_condition:
-        #lost()
+    while True:
+        for event in pygame.event.get():
+            if pygame.event == pygame.QUIT:
+                pygame.quit()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if button_rect.collidepoint(event.pos):
+                    play()
+
+        screen.blit(background_image, (0,0)) #Places the game background
+
+        #if lose_condition:
+            #lost()
     
-    #if win_condition:
-        #won()
+        #if win_condition:
+            #won()
     
-    #Draws the outline of the path
-    for outline in path_rectoutline_list:
-        pygame.draw.rect(screen, pathOutlineColor, outline)
+        #Draws the outline of the path
+        for outline in path_rectoutline_list:
+            pygame.draw.rect(screen, pathOutlineColor, outline)
 
-    # draws the path
-    for rect in path_rect_list:
-        pygame.draw.rect(screen,pathColor,rect)
+        # draws the path
+        for rect in path_rect_list:
+            pygame.draw.rect(screen,pathColor,rect)
 
-    pygame.display.flip() #Updates the game screen
+        pygame.display.flip() #Updates the game screen
 
 
     
