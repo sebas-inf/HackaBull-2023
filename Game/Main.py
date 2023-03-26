@@ -6,8 +6,10 @@ pygame.init() #Initializes pygames
 display_width = 800
 display_length = 600
 screen = pygame.display.set_mode((display_width, display_length)) #Display
-pygame.display.set_caption("Bullons") #Window Name
-background_image = pygame.image.load("Game\\art\\grass.png") #Map background
+pygame.display.set_caption("Bulloons") #Window Name
+icon = pygame.image.load("Game/art/Hackabull.PNG")
+pygame.display.set_icon(icon)
+background_image = pygame.image.load("Game/art/grass.png") #Map background
 
 #Colors
 pathColor = (204,171,120)
