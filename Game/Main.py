@@ -1,6 +1,10 @@
 import pygame
 from Node import Node
 from Bulloon import Bulloon
+from Bullet import Bullet
+from KeyboardT import KeyboardT
+from math import sqrt
+
 pygame.init() #Initializes pygames
 
 
@@ -37,10 +41,18 @@ nodes = [
 ]
 
 # Bulloons
+spawnX = -40
+spawnY = 425
 bulloons = [
-    Bulloon(1, -21, 425, 1, 0)
+    Bulloon(1,spawnX,spawnY, 1, 0),
+    Bulloon(2,spawnX,spawnY, 1, 0),
+    Bulloon(3,spawnX,spawnY, 1, 0),
+    Bulloon(2,spawnX,spawnY, 1, 0)
 ]
-
+# towers
+towers = []
+# bullets
+bullets = []
 #Path rectangles
 path_rect_list = [
     pygame.Rect(0,400,300,50),
@@ -52,6 +64,7 @@ path_rect_list = [
     pygame.Rect(450,400,250,50),
     pygame.Rect(650,450,50,150)
 ]
+
 
 #Path outline rectangles
 path_rectoutline_list = [
@@ -93,8 +106,11 @@ def won():
 def play():
     while True:
         for event in pygame.event.get():
-            if event == pygame.QUIT:
+            if event.type == pygame.QUIT:
                 pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    towers.append(KeyboardT(1, 100, 5))
                 
         screen.blit(background_image, (0,0)) #Places the game background
         
@@ -114,8 +130,33 @@ def play():
         #update bulloons
         for bulloon in bulloons:
             bulloon.update(nodes)
+            bulloon.check_reached_end(bulloons)
             bulloon.draw(screen)
+
+        for bullet in bullets:
+            bullet.update()
+            if bullet.check_hit(bulloons):
+                bullet.delete(bullets)
+            bullet.check_off_screen(display_width, display_length, bullets)
+            bullet.draw(screen)
         
+        for tower in towers:
+            if tower.placeMode:
+                tempx, tempy = pygame.mouse.get_pos()
+                tower.move(tempx,tempy)
+                if pygame.mouse.get_pressed()[0]:
+                    tower.placeMode = False
+
+            if not tower.canShoot:
+                delay = 1000 / tower.fireRate
+                tower.time = pygame.time.get_ticks()
+                elapsed_time = pygame.time.get_ticks() - delay
+                if elapsed_time >= delay:
+                    tower.canShoot = True
+            for bulloon in bulloons:
+                if sqrt(pow((tower.x - bulloon.x),2) + pow((tower.y - bulloon.y),2)) <= tower.damageRange and not tower.placeMode:
+                    bullets.append(tower.shoot(bulloon.x, bulloon.y, pygame.time.get_ticks()))
+            tower.draw(screen, tower.placeMode)
 
         pygame.display.flip() #Updates the game screen
         clock.tick(framerate) #sets max fps to the framerate 
