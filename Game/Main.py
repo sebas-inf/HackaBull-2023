@@ -1,5 +1,6 @@
 import pygame
-
+from Node import Node
+from Bulloon import Bulloon
 pygame.init() #Initializes pygames
 
 
@@ -13,12 +14,32 @@ icon = pygame.image.load("Game/art/Hackabull.PNG")
 pygame.display.set_icon(icon)#Favicon
 background_image = pygame.image.load("Game/art/grass.png") #Map background
 
+#clock to set framerate later
+clock = pygame.time.Clock()
+framerate = 60
+
 #Font
 font = pygame.font.SysFont("Arial", 50)
 
 #Colors
 pathColor = (204,171,120)
 pathOutlineColor = (190,145,103)
+
+#Nodes
+nodes = [
+    Node(278, 425, 0, -1),
+    Node(278, 125, 1, 0),
+    Node(578, 125, 0, 1),
+    Node(578, 325, -1, 0),
+    Node(428, 325, 0, 1),
+    Node(428, 425, 1, 0),
+    Node(678, 425, 0, 1)
+]
+
+# Bulloons
+bulloons = [
+    Bulloon(1, -21, 425, 1, 0)
+]
 
 #Path rectangles
 path_rect_list = [
@@ -90,7 +111,14 @@ def play():
         for rect in path_rect_list:
             pygame.draw.rect(screen,pathColor,rect)
 
+        #update bulloons
+        for bulloon in bulloons:
+            bulloon.update(nodes)
+            bulloon.draw(screen)
+        
+
         pygame.display.flip() #Updates the game screen
+        clock.tick(framerate) #sets max fps to the framerate 
 
 #Starting menu
 def menu():
