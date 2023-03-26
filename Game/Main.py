@@ -2,8 +2,7 @@ import pygame
 
 pygame.init() #Initializes pygames
 
-lose_condition = False
-win_condition = False
+
 
 #Display section
 display_width = 800
@@ -21,7 +20,7 @@ font = pygame.font.SysFont("Arial", 50)
 pathColor = (204,171,120)
 pathOutlineColor = (190,145,103)
 
-#Path
+#Path rectangles
 path_rect_list = [
     pygame.Rect(0,400,300,50),
     pygame.Rect(250,150,50,250),
@@ -33,7 +32,7 @@ path_rect_list = [
     pygame.Rect(650,450,50,150)
 ]
 
-#Path outline
+#Path outline rectangles
 path_rectoutline_list = [
     pygame.Rect(0,400,310,60),
     pygame.Rect(250,150,60,260),
@@ -44,6 +43,10 @@ path_rectoutline_list = [
     pygame.Rect(450,400,260,60),
     pygame.Rect(650,450,60,160)
 ]
+
+# flag variables
+lose_condition = False
+win_condition = False
 
 #Displays losing message
 def lost():
@@ -67,7 +70,27 @@ def won():
 
 #Runs the game itself
 def play():
-    print("asdf")
+    while True:
+        for event in pygame.event.get():
+            if event == pygame.QUIT:
+                pygame.quit()
+                
+        screen.blit(background_image, (0,0)) #Places the game background
+        
+        #if lose_condition:
+            #lost()
+        #if win_condition:
+            #won()
+    
+        #Draws the outline of the path
+        for outline in path_rectoutline_list:
+            pygame.draw.rect(screen, pathOutlineColor, outline)
+
+        # draws the path
+        for rect in path_rect_list:
+            pygame.draw.rect(screen,pathColor,rect)
+
+        pygame.display.flip() #Updates the game screen
 
 #Starting menu
 def menu():
@@ -88,26 +111,12 @@ def menu():
             if event == pygame.QUIT:
                 pygame.quit()
             
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # check for button click
                 if button_rect.collidepoint(event.pos):
                     play()
 
-        #screen.blit(background_image, (0,0)) #Places the game background
-        screen.fill((255,255,255))
-        screen.blit(button_surface, button_rect)
-        
-        #if lose_condition:
-            #lost()
-        #if win_condition:
-            #won()
-    
-        #Draws the outline of the path
-        #for outline in path_rectoutline_list:
-        #    pygame.draw.rect(screen, pathOutlineColor, outline)
-
-        # draws the path
-        #for rect in path_rect_list:
-        #    pygame.draw.rect(screen,pathColor,rect)
+        screen.fill((255,255,255)) # draw background color for menu
+        screen.blit(button_surface, button_rect) # draw play button
 
         pygame.display.flip() #Updates the game screen
 
