@@ -17,7 +17,14 @@ class Bulloon:
         if self.__health == 2:
             self.image = pygame.image.load("Game/art/bluebull.png")
             self.__width, self.__height = self.image.get_size()
-            
+
+        if self.__health == 3:
+            self.image = pygame.image.load("Game/art/greenbull.png")
+            self.__width, self.__height = self.image.get_size()
+        
+        if self.__health == 3:
+            self.image = pygame.image.load("Game/art/goldbull.png")
+            self.__width, self.__height = self.image.get_size()
 
         #self.__radius = (self.__width + self.__height) // 2 # set radius to be used in distance calculations
 
@@ -35,6 +42,17 @@ class Bulloon:
                     self.x = node.x
                 elif node.dy == 0:
                     self.y = node.y
-            
+    
+    def take_damage(self, bulloons, damage):
+        self.health = max(0, self.health - damage)
+        if self.health == 0:
+            self.delete(bulloons)
+
     def delete(self, bulloons):
         bulloons.remove(self)
+
+    def check_reached_end(self, bulloons): #returns health (the damage amount) if the bulloon reached the end, otherwise it returns 0 to indicate it has not reached the end
+        if (self.x  == 675 and self.y >= (600 + self.__height)):
+            return self.__health
+        else:
+            return 0
