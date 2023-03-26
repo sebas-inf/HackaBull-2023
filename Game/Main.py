@@ -103,10 +103,7 @@ def menu():
 
         pygame.display.flip() #Updates the game screen
 
-
-    
-    
-
+menu()
 
 
 
