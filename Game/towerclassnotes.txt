@@ -1,0 +1,9 @@
+tower class TODO
+
+    variables:
+    #necessary# 
+        damage, damageRange, placementSize
+
+    #if possible#
+        cost, cashGenerated, 
+
