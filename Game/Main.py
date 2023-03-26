@@ -2,6 +2,9 @@ import pygame
 
 pygame.init() #Initializes pygames
 
+lose_condition = True
+win_condition = False
+
 #Display section
 display_width = 800
 display_length = 600
@@ -62,10 +65,11 @@ def won():
     text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
     button_surface.blit(text, text_rect)
 
-
+#Runs the game itself
 def play():
     print("asdf")
 
+#Starting menu
 def menu():
     button_width = 200
     button_height = 100
@@ -112,8 +116,6 @@ menu()
 
     
     
-
-
 
 
 
