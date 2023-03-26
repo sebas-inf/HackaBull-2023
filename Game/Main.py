@@ -77,10 +77,10 @@ def play():
                 
         screen.blit(background_image, (0,0)) #Places the game background
         
-        #if lose_condition:
-            #lost()
-        #if win_condition:
-            #won()
+        if lose_condition:
+            lost()
+        if win_condition:
+            won()
     
         #Draws the outline of the path
         for outline in path_rectoutline_list:
@@ -122,12 +122,3 @@ def menu():
 
 
 menu()
-
-    
-    
-
-
-
-
-
-
