@@ -42,6 +42,7 @@ path_rectoutline_list = [
     pygame.Rect(650,450,60,160)
 ]
 
+#Displays losing message
 def lost():
     button_width = 200
     button_height = 100
@@ -51,6 +52,7 @@ def lost():
     text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
     button_surface.blit(text, text_rect)
 
+#Displays winning message
 def won():
     button_width = 200
     button_height = 100
@@ -59,7 +61,6 @@ def won():
     text = font.render("You Won", True, (255,255,255))
     text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
     button_surface.blit(text, text_rect)
-
 
 
 while True:
@@ -74,7 +75,6 @@ while True:
     if win_condition:
         won()
     
-
     #Draws the outline of the path
     for outline in path_rectoutline_list:
         pygame.draw.rect(screen, pathOutlineColor, outline)
