@@ -8,8 +8,11 @@ display_length = 600
 screen = pygame.display.set_mode((display_width, display_length)) #Display
 pygame.display.set_caption("Bulloons") #Window Name
 icon = pygame.image.load("Game/art/Hackabull.PNG")
-pygame.display.set_icon(icon)
+pygame.display.set_icon(icon)#Favicon
 background_image = pygame.image.load("Game/art/grass.png") #Map background
+
+#Font
+font = pygame.font.SysFont("Arial", 50)
 
 #Colors
 pathColor = (204,171,120)
@@ -39,21 +42,69 @@ path_rectoutline_list = [
     pygame.Rect(650,450,60,160)
 ]
 
-while True:
-    if pygame.event == pygame.QUIT:
-        pygame.quit()
+#Displays losing message
+def lost():
+    button_width = 200
+    button_height = 100
+    button_surface = pygame.Surface((button_width, button_height))
+    button_surface.fill((122,45,48))
+    text = font.render("You Lost", True, (255,255,255))
+    text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
+    button_surface.blit(text, text_rect)
 
-    screen.blit(background_image, (0,0)) #Places the game background
+#Displays winning message
+def won():
+    button_width = 200
+    button_height = 100
+    button_surface = pygame.Surface((button_width, button_height))
+    button_surface.fill((65,135,145))
+    text = font.render("You Won", True, (255,255,255))
+    text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
+    button_surface.blit(text, text_rect)
 
-    #Draws the outline of the path
-    for outline in path_rectoutline_list:
-        pygame.draw.rect(screen, pathOutlineColor, outline)
 
-    # draws the path
-    for rect in path_rect_list:
-        pygame.draw.rect(screen,pathColor,rect)
+def play():
+    pass
 
-    pygame.display.flip() #Updates the game screen
+def menu():
+    button_width = 200
+    button_height = 100
+    button_surface = pygame.Surface((button_width, button_height))
+    button_surface.fill((65,135,145))
+    button_rect = button_surface.get_rect(center = (button_width // 2, button_height // 2))
+    text = font.render("Start", True, (255,255,255))
+    text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
+    button_surface.blit(text, text_rect)
+
+    while True:
+        for event in pygame.event.get():
+            if pygame.event == pygame.QUIT:
+                pygame.quit()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if button_rect.collidepoint(event.pos):
+                    play()
+
+        screen.blit(background_image, (0,0)) #Places the game background
+
+        #if lose_condition:
+            #lost()
+    
+        #if win_condition:
+            #won()
+    
+        #Draws the outline of the path
+        for outline in path_rectoutline_list:
+            pygame.draw.rect(screen, pathOutlineColor, outline)
+
+        # draws the path
+        for rect in path_rect_list:
+            pygame.draw.rect(screen,pathColor,rect)
+
+        pygame.display.flip() #Updates the game screen
+
+
+    
     
 
 
