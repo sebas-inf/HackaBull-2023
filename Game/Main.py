@@ -11,6 +11,9 @@ icon = pygame.image.load("Game/art/Hackabull.PNG")
 pygame.display.set_icon(icon)#Favicon
 background_image = pygame.image.load("Game/art/grass.png") #Map background
 
+#Font
+font = pygame.font.SysFont("Arial", 50)
+
 #Colors
 pathColor = (204,171,120)
 pathOutlineColor = (190,145,103)
@@ -39,11 +42,38 @@ path_rectoutline_list = [
     pygame.Rect(650,450,60,160)
 ]
 
+def lost():
+    button_width = 200
+    button_height = 100
+    button_surface = pygame.Surface((button_width, button_height))
+    button_surface.fill((122,45,48))
+    text = font.render("You Lost", True, (255,255,255))
+    text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
+    button_surface.blit(text, text_rect)
+
+def won():
+    button_width = 200
+    button_height = 100
+    button_surface = pygame.Surface((button_width, button_height))
+    button_surface.fill((65,135,145))
+    text = font.render("You Won", True, (255,255,255))
+    text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
+    button_surface.blit(text, text_rect)
+
+
+
 while True:
     if pygame.event == pygame.QUIT:
         pygame.quit()
 
     screen.blit(background_image, (0,0)) #Places the game background
+
+    if lose_condition:
+        lost()
+    
+    if win_condition:
+        won()
+    
 
     #Draws the outline of the path
     for outline in path_rectoutline_list:
@@ -54,6 +84,9 @@ while True:
         pygame.draw.rect(screen,pathColor,rect)
 
     pygame.display.flip() #Updates the game screen
+
+
+    
     
 
 
