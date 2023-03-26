@@ -2,6 +2,9 @@ import pygame
 
 pygame.init() #Initializes pygames
 
+lose_condition = True
+win_condition = False
+
 #Display section
 display_width = 800
 display_length = 600
@@ -62,10 +65,11 @@ def won():
     text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
     button_surface.blit(text, text_rect)
 
-
+#Runs the game itself
 def play():
     pass
 
+#Starting menu
 def menu():
     button_width = 200
     button_height = 100
@@ -87,11 +91,11 @@ def menu():
 
         screen.blit(background_image, (0,0)) #Places the game background
 
-        #if lose_condition:
-            #lost()
+        if lose_condition:
+            lost()
     
-        #if win_condition:
-            #won()
+        if win_condition:
+            won()
     
         #Draws the outline of the path
         for outline in path_rectoutline_list:
@@ -100,10 +104,11 @@ def menu():
         # draws the path
         for rect in path_rect_list:
             pygame.draw.rect(screen,pathColor,rect)
-
+            
         pygame.display.flip() #Updates the game screen
 
 menu()
+
 
 
 
