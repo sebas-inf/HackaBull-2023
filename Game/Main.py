@@ -2,7 +2,7 @@ import pygame
 
 pygame.init() #Initializes pygames
 
-lose_condition = True
+lose_condition = False
 win_condition = False
 
 #Display section
