@@ -64,7 +64,7 @@ def won():
 
 
 def play():
-    pass
+    print("asdf")
 
 def menu():
     button_width = 200
@@ -75,34 +75,40 @@ def menu():
     text = font.render("Start", True, (255,255,255))
     text_rect = text.get_rect(center = (button_width // 2, button_height // 2))
     button_surface.blit(text, text_rect)
+    button_rect.x = display_width // 2 - button_width // 2
+    button_rect.y = display_length // 2 - button_height // 2
+    
 
     while True:
         for event in pygame.event.get():
-            if pygame.event == pygame.QUIT:
+            if event == pygame.QUIT:
                 pygame.quit()
             
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if button_rect.collidepoint(event.pos):
                     play()
 
-        screen.blit(background_image, (0,0)) #Places the game background
-
+        #screen.blit(background_image, (0,0)) #Places the game background
+        screen.fill((255,255,255))
+        screen.blit(button_surface, button_rect)
+        
         #if lose_condition:
             #lost()
-    
         #if win_condition:
             #won()
     
         #Draws the outline of the path
-        for outline in path_rectoutline_list:
-            pygame.draw.rect(screen, pathOutlineColor, outline)
+        #for outline in path_rectoutline_list:
+        #    pygame.draw.rect(screen, pathOutlineColor, outline)
 
         # draws the path
-        for rect in path_rect_list:
-            pygame.draw.rect(screen,pathColor,rect)
+        #for rect in path_rect_list:
+        #    pygame.draw.rect(screen,pathColor,rect)
 
         pygame.display.flip() #Updates the game screen
 
+
+menu()
 
     
     
