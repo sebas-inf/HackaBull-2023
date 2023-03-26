@@ -46,8 +46,7 @@ spawnY = 425
 bulloons = [
     Bulloon(1,spawnX,spawnY, 1, 0),
     Bulloon(2,spawnX,spawnY, 1, 0),
-    Bulloon(3,spawnX,spawnY, 1, 0),
-    Bulloon(2,spawnX,spawnY, 1, 0)
+    Bulloon(3,spawnX,spawnY, 1, 0)
 ]
 # towers
 towers = []
@@ -118,7 +117,7 @@ def play():
             lost()
         if win_condition:
             won()
-    
+
         #Draws the outline of the path
         for outline in path_rectoutline_list:
             pygame.draw.rect(screen, pathOutlineColor, outline)

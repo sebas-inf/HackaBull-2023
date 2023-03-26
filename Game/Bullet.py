@@ -24,7 +24,7 @@ class Bullet:
         
     def check_hit(self, bulloons):
         for bulloon in bulloons:
-            distance = sqrt((bulloon.x - self.x) ** 2 + (bulloon.y - self.y) ** 2)
+            distance = sqrt(pow((bulloon.x - self.x),2) + pow((bulloon.y - self.y),2))
             if distance <= bulloon.radius + self.radius:
                 bulloon.take_damage(bulloons, self.damage)
                 return True
