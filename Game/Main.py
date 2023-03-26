@@ -110,6 +110,8 @@ def play():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     towers.append(KeyboardT(1, 100, 5))
+                if event.key == pygame.K_UP:
+                    bulloons.append(Bulloon(3,spawnX, spawnY, 1, 0))
                 
         screen.blit(background_image, (0,0)) #Places the game background
         
